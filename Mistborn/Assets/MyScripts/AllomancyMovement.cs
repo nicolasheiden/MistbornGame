@@ -1,20 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+//using UnityEngine.Events;
 
 public class AllomancyMovement : MonoBehaviour
 {
-    #region Variables
+    #region Variable Declarations
 
     //references
     private Rigidbody rb;
     public Transform AllomanticLineOrigin; // The origin point for the Allomantic line
     public GameObject user; // The character using Allomancy
     [SerializeField] private LayerMask metalLayer; // Layer mask for metal objects
+    private SphereCollider detectionTrigger;
     public GameObject CoinPrefab; // Prefab for the coin to be instantiated
 
     // Allomancy variables
     public float detectionRadius = 10f; // Radius to detect nearby metal objects
+    public Material lineMaterial; // Material for the Allomantic line
     private bool isPushing = false;
     private bool isPulling = false;
     public float pushForce = 10f;
@@ -24,25 +27,17 @@ public class AllomancyMovement : MonoBehaviour
     private float duraluminTimer = 0f; // Timer to track Duralumin cooldown
     private bool canUseDuralumin = true; // Flag to check if Duralumin can be used
     private Vector3 movementDirection;
+
+    //Coin variables
+    public int maxCoinCount = 10; // Maximum number of coins the player can carry
+
+    [SerializeField] private int coinCount = 0; // Number of coins the player currently has
+    
+
     private List<GameObject> nearbyMetalObjects = new List<GameObject>();
 
-    //LineRenderer variables
-    [SerializeField, Range(0.01f, 0.1f)] private float lineWidth = 0.01f;
-    public Material lineMaterial; // Material for the Allomantic line
-    [SerializeField] private Color nearRangeColor = Color.white;
-    [SerializeField] private Color farRangeColor = Color.gray;
-    [SerializeField, Min(0f)] private float nearRange = 0f;
-    [SerializeField, Min(0.01f)] private float farRange = 10f;
-    [SerializeField, Range(4, 32)] private int curveSegments = 12;
-    [SerializeField, Min(0f)] private float maxCurveOffset = 0.5f;
-    [SerializeField, Min(0.01f)] private float speedForMaxCurve = 5f;
-
     public GameObject debugGameObject; // object for testing
-    private LineRenderer debugLineRenderer;
-    private MaterialPropertyBlock linePropertyBlock;
-    private int lineColorPropertyId;
-
-
+    private bool isDebugging = false; // flag to toggle debugging
 
 
     #endregion
@@ -50,85 +45,66 @@ public class AllomancyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //startup code here
         rb = GetComponent<Rigidbody>();
+        detectionTrigger = GetComponent<SphereCollider>();
+        detectionTrigger.isTrigger = true;
+        detectionTrigger.radius = detectionRadius;
+        coinCount = maxCoinCount; // Initialize coin count to max at the start
+
+        Collider[] metalColliders = Physics.OverlapSphere(
+            detectionTrigger.bounds.center,
+            detectionTrigger.bounds.extents.x,
+            metalLayer,
+            QueryTriggerInteraction.Collide);
+
+        foreach (Collider metalCollider in metalColliders)
+        {
+            if (!nearbyMetalObjects.Contains(metalCollider.gameObject))
+                nearbyMetalObjects.Add(metalCollider.gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame)
+        foreach (GameObject metalObject in nearbyMetalObjects)
         {
-            if (debugGameObject == null || AllomanticLineOrigin == null || lineMaterial == null)
+            if (metalObject != null)
             {
-                Debug.LogError("Assign the debug GameObject, Allomantic Line Origin, and line material.", this);
-                return;
+                DrawAllomanticLine(metalObject);
             }
-
-            if (!debugGameObject.TryGetComponent(out debugLineRenderer))
-            {
-                Debug.LogError("The debug GameObject must have a LineRenderer component.", debugGameObject);
-                return;
-            }
-
-            if (lineMaterial.HasProperty("_BaseColor"))
-                lineColorPropertyId = Shader.PropertyToID("_BaseColor");
-            else if (lineMaterial.HasProperty("_Color"))
-                lineColorPropertyId = Shader.PropertyToID("_Color");
-            else
-            {
-                Debug.LogError("The line material shader has no _BaseColor or _Color property.", lineMaterial);
-                debugLineRenderer = null;
-                return;
-            }
-
-            debugLineRenderer.useWorldSpace = true;
-            debugLineRenderer.positionCount = curveSegments + 1;
-            debugLineRenderer.startWidth = lineWidth;
-            debugLineRenderer.endWidth = lineWidth;
-            debugLineRenderer.sharedMaterial = lineMaterial;
-            debugLineRenderer.enabled = true;
-            linePropertyBlock = new MaterialPropertyBlock();
         }
 
-        if (debugLineRenderer != null && debugLineRenderer.enabled &&
-            debugGameObject != null && AllomanticLineOrigin != null)
+        //Turns on/off debugging mode and draws the line between the player and the metal object
+        if (Keyboard.current.pKey.wasPressedThisFrame)
         {
-            Vector3 objectPosition = debugGameObject.transform.position;
-            Vector3 originPosition = AllomanticLineOrigin.position;
-            debugLineRenderer.positionCount = curveSegments + 1;
-
-            Vector3 lineDirection = (originPosition - objectPosition).normalized;
-            Vector3 lateralVelocity = rb != null
-                ? Vector3.ProjectOnPlane(rb.linearVelocity, lineDirection)
-                : Vector3.zero;
-            Vector3 curveDirection = lateralVelocity.sqrMagnitude > 0.001f
-                ? -lateralVelocity.normalized
-                : Vector3.zero;
-            float speedFactor = rb != null
-                ? Mathf.Clamp01(lateralVelocity.magnitude / speedForMaxCurve)
-                : 0f;
-            Vector3 controlPoint = (objectPosition + originPosition) * 0.5f
-                + curveDirection * (maxCurveOffset * speedFactor * 2f);
-
-            for (int i = 0; i <= curveSegments; i++)
-            {
-                float t = (float)i / curveSegments;
-                float inverseT = 1f - t;
-                Vector3 point = inverseT * inverseT * objectPosition
-                    + 2f * inverseT * t * controlPoint
-                    + t * t * originPosition;
-                debugLineRenderer.SetPosition(i, point);
-            }
-
-            float distance = Vector3.Distance(objectPosition, originPosition);
-            float range = Mathf.InverseLerp(nearRange, Mathf.Max(nearRange + 0.01f, farRange), distance);
-            Color rangeColor = Color.Lerp(nearRangeColor, farRangeColor, range);
-
-            debugLineRenderer.GetPropertyBlock(linePropertyBlock);
-            linePropertyBlock.SetColor(lineColorPropertyId, rangeColor);
-            debugLineRenderer.SetPropertyBlock(linePropertyBlock);
+            isDebugging = !isDebugging;
+            debugGameObject.SetActive(isDebugging);
         }
+        if (isDebugging)//does the actual drawing of the line between the player and the metal object
+        {
+            DrawAllomanticLine(debugGameObject);
+        }
+       
     }
+
+    void OnDrawGizmosSelected()
+    {
+        SphereCollider sphere = GetComponent<SphereCollider>();
+        if (sphere == null)
+            return;
+
+        Vector3 scale = transform.lossyScale;
+        float worldRadius = detectionRadius * Mathf.Max(
+            Mathf.Abs(scale.x),
+            Mathf.Abs(scale.y),
+            Mathf.Abs(scale.z));
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.TransformPoint(sphere.center), worldRadius);
+    }
+
     #endregion
 
 
@@ -152,7 +128,48 @@ public class AllomancyMovement : MonoBehaviour
         print("Duralumin activated");
     }
 
+    void DrawAllomanticLine(GameObject metalObject) //Draws the blue line between the player and the metal object
+    {
+        if (metalObject == null || AllomanticLineOrigin == null)
+            return;
 
+        LineRenderer lineRenderer = metalObject.GetComponent<LineRenderer>();
+        if (lineRenderer == null)
+        {
+            Debug.LogError($"Metal object '{metalObject.name}' needs a LineRenderer component.", metalObject);
+            return;
+        }
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, AllomanticLineOrigin.position);
+        lineRenderer.SetPosition(1, metalObject.transform.position);
+
+        //LineRenderer Variable update
+        lineRenderer.material = lineMaterial;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & metalLayer) != 0)
+        {
+            if (!nearbyMetalObjects.Contains(other.gameObject)) //checks if already in the list
+                nearbyMetalObjects.Add(other.gameObject);
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & metalLayer) != 0)
+        {
+            if (nearbyMetalObjects.Remove(other.gameObject))
+            {
+                LineRenderer lineRenderer = other.GetComponent<LineRenderer>();
+                if (lineRenderer != null)
+                    lineRenderer.positionCount = 0;
+            }
+        }
+    }
 
     #endregion
 }

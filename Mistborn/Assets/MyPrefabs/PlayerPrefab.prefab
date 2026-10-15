@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 3950228563698924564}
   - component: {fileID: 723247458894302269}
   - component: {fileID: 5067167862125475344}
+  - component: {fileID: 2452739880280520610}
   m_Layer: 8
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -777,9 +778,6 @@ MonoBehaviour:
   pushForce: 10
   pullForce: 10
   duraluminCD: 5
-  lineColor: {r: 0, g: 0.4917214, b: 1, a: 1}
-  lineWidth: 0.01
-  lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
   debugGameObject: {fileID: 0}
 --- !u!95 &7130583386377995171
 Animator:
@@ -1006,6 +1004,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 0}
+--- !u!135 &2452739880280520610
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400764600020743222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2668624242383159689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,7 +1272,7 @@ Transform:
   m_GameObject: {fileID: 3889190242435600515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.191, z: 0}
+  m_LocalPosition: {x: 0, y: 0.957, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
