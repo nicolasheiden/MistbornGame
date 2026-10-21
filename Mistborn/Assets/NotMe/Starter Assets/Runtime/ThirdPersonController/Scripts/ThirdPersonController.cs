@@ -87,8 +87,14 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         private Vector3 _externalVelocity;
+        private Vector3 _airMoveVelocity;
+        private bool _wasGrounded = true;
 
         [SerializeField] private float _externalVelocityDamping = 4.0f;
+        [SerializeField] private float _groundedExternalVelocityDamping = 20.0f;
+        [SerializeField, Range(0f, 1f)] private float _landingHorizontalVelocityMultiplier = 0.25f;
+        [SerializeField] private float _airControlAcceleration = 8.0f;
+        [SerializeField] private float _airDrag = 0.2f;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -159,6 +165,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            _wasGrounded = Grounded;
         }
 
         private void Update()
@@ -222,6 +229,17 @@ namespace StarterAssets
 
         private void Move()
         {
+            if (Grounded && !_wasGrounded)
+            {
+                _externalVelocity.x *= _landingHorizontalVelocityMultiplier;
+                _externalVelocity.z *= _landingHorizontalVelocityMultiplier;
+
+                if (_externalVelocity.y > 0f)
+                    _externalVelocity.y = 0f;
+            }
+
+            _wasGrounded = Grounded;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -231,8 +249,8 @@ namespace StarterAssets
             // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
-            // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            // Track input-driven speed separately from external movement such as Steel Push.
+            float currentHorizontalSpeed = _speed;
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
@@ -276,14 +294,39 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+            Vector3 horizontalMovement;
+            if (Grounded)
+            {
+                horizontalMovement = targetDirection.normalized * _speed;
+                _airMoveVelocity = horizontalMovement;
+            }
+            else if (_input.move != Vector2.zero)
+            {
+                Vector3 desiredAirVelocity = targetDirection.normalized * targetSpeed * inputMagnitude;
+                _airMoveVelocity = Vector3.MoveTowards(
+                    _airMoveVelocity,
+                    desiredAirVelocity,
+                    _airControlAcceleration * Time.deltaTime);
+                horizontalMovement = _airMoveVelocity;
+            }
+            else
+            {
+                _airMoveVelocity = Vector3.MoveTowards(
+                    _airMoveVelocity,
+                    Vector3.zero,
+                    _airDrag * Time.deltaTime);
+                horizontalMovement = _airMoveVelocity;
+            }
+
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            _controller.Move(horizontalMovement * Time.deltaTime +
                              _externalVelocity * Time.deltaTime +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
             _externalVelocity = Vector3.MoveTowards(
                 _externalVelocity,
                 Vector3.zero,
-                _externalVelocityDamping * Time.deltaTime);
+                (Grounded ? _groundedExternalVelocityDamping : _externalVelocityDamping) *
+                Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)

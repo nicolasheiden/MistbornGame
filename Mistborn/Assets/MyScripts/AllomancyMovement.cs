@@ -41,7 +41,7 @@ public class AllomancyMovement : MonoBehaviour
     public int maxCoinCount = 10; // Maximum number of coins the player can carry
 
     [SerializeField] private int coinCount = 0; // Number of coins the player currently has
-    
+
 
     private List<GameObject> nearbyMetalObjects = new List<GameObject>();
     public GameObject selectedMetalObject = null; // The closest metal object in the direction of arrow
@@ -107,7 +107,7 @@ public class AllomancyMovement : MonoBehaviour
                 movementDirection = inputDirection;
             }
 
-            
+
         }
         UpdateDebugArrow();
 
@@ -119,7 +119,7 @@ public class AllomancyMovement : MonoBehaviour
             }
         }
         selectedMetalObject = FindSteelPushTarget(-movementDirection);
-       
+
     }
 
     void OnDrawGizmosSelected()
@@ -150,7 +150,7 @@ public class AllomancyMovement : MonoBehaviour
         lineRenderer.endWidth = 0.04f;
         lineRenderer.sharedMaterial = arrowMaterial;
         //lineRenderer.startColor = debugArrowColor;
-       //lineRenderer.endColor = debugArrowColor;
+        //lineRenderer.endColor = debugArrowColor;
         lineRenderer.enabled = false;
         return lineRenderer;
     }
@@ -209,7 +209,7 @@ public class AllomancyMovement : MonoBehaviour
         Vector3 horizontalOffset = pushDirection;
         horizontalOffset.y = 0f;
 
-        CharacterController characterController = GetComponent<CharacterController>();
+        CharacterController characterController = GetComponent<CharacterController>(); //used to see if player above the target, if so, push up instead of away from the target
         Collider targetCollider = pushTarget.GetComponent<Collider>();
         float topPushDistance = characterController != null
             ? characterController.radius + (targetCollider != null ? targetCollider.bounds.extents.magnitude : 0f)
@@ -240,28 +240,46 @@ public class AllomancyMovement : MonoBehaviour
         print("Duralumin activated");
     }
 
+    public void SpawnCoin()
+    {
+        if (CoinPrefab == null)
+        {
+            Debug.LogError("CoinPrefab is not assigned in the inspector.");
+            return;
+        }
+        else if (coinCount != 0)
+        {
+            Instantiate(CoinPrefab, transform.position + Vector3.up, Quaternion.Euler(-90f, 0f, 0f));
+            coinCount--;
+        }
+        else
+        {
+            Debug.Log("No coins left to spawn.");
+        }
+    }
+
     GameObject FindSteelPushTarget(Vector3 direction)//Function for finding the closest metal object in the direction of the arrow
     {
         GameObject closestMetalObject = null;
         if (nearbyMetalObjects.Count == 0)
             return null;
 
-            foreach(GameObject metalObject in nearbyMetalObjects)
+        foreach (GameObject metalObject in nearbyMetalObjects)
+        {
+            if (metalObject == null)
+                continue;
+
+            Vector3 toMetalObject = (metalObject.transform.position - transform.position).normalized;
+            float angle = Vector3.Angle(direction, toMetalObject);
+
+            if (angle <= selectionAngleThreshold)
             {
-                if (metalObject == null)
-                    continue;
-
-                Vector3 toMetalObject = (metalObject.transform.position - transform.position).normalized;
-                float angle = Vector3.Angle(direction, toMetalObject);
-
-                if (angle <= selectionAngleThreshold)
+                if (closestMetalObject == null || Vector3.Distance(transform.position, metalObject.transform.position) < Vector3.Distance(transform.position, closestMetalObject.transform.position))
                 {
-                    if (closestMetalObject == null || Vector3.Distance(transform.position, metalObject.transform.position) < Vector3.Distance(transform.position, closestMetalObject.transform.position))
-                    {
-                        closestMetalObject = metalObject;
-                    }
+                    closestMetalObject = metalObject;
                 }
             }
+        }
         if (closestMetalObject != null)
         {
             LineRenderer lineRenderer = closestMetalObject.GetComponent<LineRenderer>();

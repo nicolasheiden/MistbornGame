@@ -18,6 +18,11 @@ public class AllomancyInputs : MonoBehaviour
             TryIronPull();
         }
         //duralumin activation here
+
+        if(Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            TrySpawnCoin();
+        }
         
     }
 
@@ -38,5 +43,9 @@ public class AllomancyInputs : MonoBehaviour
         //allomancy.ActivateDuralumin();
     }
 
+    void TrySpawnCoin()
+    {
+        allomancy.SpawnCoin();
+    }
 
 }

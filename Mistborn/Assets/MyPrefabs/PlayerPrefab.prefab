@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 723247458894302269}
   - component: {fileID: 5067167862125475344}
   - component: {fileID: 2452739880280520610}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CoinPrefab: {fileID: 0}
-  detectionRadius: 10
+  detectionRadius: 20
   lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
   arrowMaterial: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}
   selectedMaterial: {fileID: 2100000, guid: c0ec30e71366c6141803d6be36792a86, type: 2}
@@ -846,6 +846,8 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   _externalVelocityDamping: 4
+  _airControlAcceleration: 8
+  _airDrag: 0.2
 --- !u!95 &7130583386377995171
 Animator:
   serializedVersion: 7
@@ -1279,7 +1281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5347866574571611259}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LinePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
