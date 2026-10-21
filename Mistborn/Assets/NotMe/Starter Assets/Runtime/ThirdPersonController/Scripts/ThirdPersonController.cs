@@ -106,6 +106,12 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
+        public Vector3 MovementDirection =>
+            Quaternion.Euler(0.0f, _mainCamera.transform.eulerAngles.y, 0.0f) *
+            new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+        public bool IsJumpingOrSpaceHeld => _input.jump || !Grounded;
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;

@@ -767,6 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b9fbadd54f6c341a34a06c1f6a9c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  thirdPersonController: {fileID: 554971910395273869}
   AllomanticLineOrigin: {fileID: 5347866574571611259}
   user: {fileID: 2400764600020743222}
   metalLayer:
@@ -778,6 +779,8 @@ MonoBehaviour:
   pushForce: 10
   pullForce: 10
   duraluminCD: 5
+  debugArrowLength: 2
+  debugArrowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   maxCoinCount: 10
   coinCount: 0
   debugGameObject: {fileID: 0}

@@ -759,9 +759,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
     - target: {fileID: 7548177786683226279, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: arrowMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}
+    - target: {fileID: 7548177786683226279, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: debugGameObject
       value: 
       objectReference: {fileID: 848011101}
+    - target: {fileID: 7548177786683226279, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: debugArrowHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548177786683226279, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: debugArrowLength
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
