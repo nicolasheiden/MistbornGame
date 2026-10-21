@@ -20,6 +20,7 @@ public class AllomancyMovement : MonoBehaviour
     public float detectionRadius = 10f; // Radius to detect nearby metal objects
     public Material lineMaterial; // Material for the Allomantic line
     public Material arrowMaterial; // Material for the debug arrow
+    public Material selectedMaterial; // Material for the selected metal object
     private bool isPushing = false;
     private bool isPulling = false;
     public float pushForce = 10f;
@@ -43,10 +44,9 @@ public class AllomancyMovement : MonoBehaviour
     
 
     private List<GameObject> nearbyMetalObjects = new List<GameObject>();
-    private GameObject ClosestMetalObjectinDirection = null; // The closest metal object in the direction of arrow
-
-    public GameObject debugGameObject; // object for testing
-    private bool isDebugging = false; // flag to toggle debugging
+    public GameObject selectedMetalObject = null; // The closest metal object in the direction of arrow
+    [Range(0f, 180f)]
+    public float selectionAngleThreshold = 30f; // Angle threshold for selecting the closest metal object
 
 
     #endregion
@@ -106,6 +106,8 @@ public class AllomancyMovement : MonoBehaviour
             {
                 movementDirection = inputDirection;
             }
+
+            
         }
         UpdateDebugArrow();
 
@@ -116,17 +118,7 @@ public class AllomancyMovement : MonoBehaviour
                 DrawAllomanticLine(metalObject);
             }
         }
-
-        //Turns on/off debugging mode and draws the line between the player and the metal object
-        if (Keyboard.current.pKey.wasPressedThisFrame)
-        {
-            isDebugging = !isDebugging;
-            debugGameObject.SetActive(isDebugging);
-        }
-        if (isDebugging)//does the actual drawing of the line between the player and the metal object
-        {
-            DrawAllomanticLine(debugGameObject);
-        }
+        selectedMetalObject = FindSteelPushTarget(-movementDirection);
        
     }
 
@@ -199,19 +191,50 @@ public class AllomancyMovement : MonoBehaviour
 
     #region Functions
 
-    void SteelPush(GameObject pushTarget)
+    public void SteelPush(GameObject pushTarget)
     {
-        // Implement Steel Push logic here
-        print("Steel Push activated");
+        if (pushTarget == null)
+        {
+            Debug.LogWarning("No metal object selected for Steel Push.");
+            return;
+        }
+
+        if (thirdPersonController == null)
+        {
+            Debug.LogError("Cannot Steel Push because ThirdPersonController is missing.", this);
+            return;
+        }
+
+        Vector3 pushDirection = transform.position - pushTarget.transform.position;
+        Vector3 horizontalOffset = pushDirection;
+        horizontalOffset.y = 0f;
+
+        CharacterController characterController = GetComponent<CharacterController>();
+        Collider targetCollider = pushTarget.GetComponent<Collider>();
+        float topPushDistance = characterController != null
+            ? characterController.radius + (targetCollider != null ? targetCollider.bounds.extents.magnitude : 0f)
+            : 0.5f;
+        bool isAboveTarget = pushDirection.y > 0f &&
+                             horizontalOffset.sqrMagnitude <= topPushDistance * topPushDistance;
+        bool hasMovementInput = thirdPersonController.MovementDirection.sqrMagnitude > 0.0001f;
+
+        if (isAboveTarget && !hasMovementInput)
+            pushDirection = Vector3.up;
+
+        if (pushDirection.sqrMagnitude <= 0.0001f)
+            return;
+
+        thirdPersonController.ApplyExternalImpulse(
+            pushDirection.normalized * pushForce * Time.deltaTime);
     }
 
-    void IronPull(GameObject pullTarget)
+    public void IronPull(GameObject pullTarget)
     {
         // Implement Iron Pull logic here
         print("Iron Pull activated");
     }
 
-    void ActivateDuralumin()
+    public void ActivateDuralumin()
     {
         // Implement Duralumin activation logic here
         print("Duralumin activated");
@@ -222,6 +245,31 @@ public class AllomancyMovement : MonoBehaviour
         GameObject closestMetalObject = null;
         if (nearbyMetalObjects.Count == 0)
             return null;
+
+            foreach(GameObject metalObject in nearbyMetalObjects)
+            {
+                if (metalObject == null)
+                    continue;
+
+                Vector3 toMetalObject = (metalObject.transform.position - transform.position).normalized;
+                float angle = Vector3.Angle(direction, toMetalObject);
+
+                if (angle <= selectionAngleThreshold)
+                {
+                    if (closestMetalObject == null || Vector3.Distance(transform.position, metalObject.transform.position) < Vector3.Distance(transform.position, closestMetalObject.transform.position))
+                    {
+                        closestMetalObject = metalObject;
+                    }
+                }
+            }
+        if (closestMetalObject != null)
+        {
+            LineRenderer lineRenderer = closestMetalObject.GetComponent<LineRenderer>();
+            if (lineRenderer != null)
+                lineRenderer.material = selectedMaterial;
+            else
+                Debug.LogError($"Metal object '{closestMetalObject.name}' needs a LineRenderer component.", closestMetalObject);
+        }
 
         return closestMetalObject;
     }

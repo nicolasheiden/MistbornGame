@@ -723,6 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4504083774519649401}
   - component: {fileID: 7548177786683226279}
+  - component: {fileID: 1817810406233457524}
   - component: {fileID: 554971910395273869}
   - component: {fileID: 7130583386377995171}
   - component: {fileID: 5272755997635283220}
@@ -773,17 +774,33 @@ MonoBehaviour:
   metalLayer:
     serializedVersion: 2
     m_Bits: 64
-  CoinPrefab: {fileID: 2712649723675856626, guid: aa9f710eb1eebf74b8b079a3041b606b, type: 3}
+  CoinPrefab: {fileID: 0}
   detectionRadius: 10
   lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
+  arrowMaterial: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: c0ec30e71366c6141803d6be36792a86, type: 2}
   pushForce: 10
   pullForce: 10
   duraluminCD: 5
-  debugArrowLength: 2
-  debugArrowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  debugArrowLength: 1
+  debugArrowHeight: 1
   maxCoinCount: 10
   coinCount: 0
-  debugGameObject: {fileID: 0}
+  selectedMetalObject: {fileID: 0}
+  selectionAngleThreshold: 45
+--- !u!114 &1817810406233457524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400764600020743222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474795966696669439c0c2eb835acbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  allomancy: {fileID: 7548177786683226279}
 --- !u!114 &554971910395273869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 4
   SprintSpeed: 7
-  RotationSmoothTime: 0.12
+  RotationSmoothTime: 0.05
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
@@ -814,7 +831,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
   JumpHeight: 2
-  Gravity: -15
+  Gravity: -8
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1
@@ -828,6 +845,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _externalVelocityDamping: 4
 --- !u!95 &7130583386377995171
 Animator:
   serializedVersion: 7
