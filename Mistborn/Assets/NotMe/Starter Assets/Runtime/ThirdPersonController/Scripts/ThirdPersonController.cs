@@ -14,6 +14,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        #region Inspector Settings
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -75,6 +77,10 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        #endregion
+
+        #region Runtime State
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -114,6 +120,11 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private bool _hasAnimator;
+
+        #endregion
+
+        #region Public State
 
         public Vector3 MovementDirection =>
             Quaternion.Euler(0.0f, _mainCamera.transform.eulerAngles.y, 0.0f) *
@@ -121,9 +132,11 @@ namespace StarterAssets
 
         public bool IsJumpingOrSpaceHeld => _input.jump || !Grounded;
 
-        private const float _threshold = 0.01f;
+        #endregion
 
-        private bool _hasAnimator;
+        #region Input Helpers
+
+        private const float _threshold = 0.01f;
 
         private bool IsCurrentDeviceMouse
         {
@@ -137,6 +150,9 @@ namespace StarterAssets
             }
         }
 
+        #endregion
+
+        #region Unity Lifecycle
 
         private void Awake()
         {
@@ -182,6 +198,10 @@ namespace StarterAssets
             CameraRotation();
         }
 
+        #endregion
+
+        #region Initialization
+
         private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
@@ -190,6 +210,10 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
+
+        #endregion
+
+        #region Grounding
 
         private void GroundedCheck()
         {
@@ -205,6 +229,10 @@ namespace StarterAssets
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
         }
+
+        #endregion
+
+        #region Camera
 
         private void CameraRotation()
         {
@@ -226,6 +254,10 @@ namespace StarterAssets
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
+
+        #endregion
+
+        #region Movement
 
         private void Move()
         {
@@ -341,6 +373,10 @@ namespace StarterAssets
             _externalVelocity += impulse;
         }
 
+        #endregion
+
+        #region Jumping and Gravity
+
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -410,6 +446,10 @@ namespace StarterAssets
             }
         }
 
+        #endregion
+
+        #region Debug Helpers
+
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -431,6 +471,10 @@ namespace StarterAssets
                 GroundedRadius);
         }
 
+        #endregion
+
+        #region Animation Events
+
         private void OnFootstep(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
@@ -450,5 +494,7 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
+
+        #endregion
     }
 }

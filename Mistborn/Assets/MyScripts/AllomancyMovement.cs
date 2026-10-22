@@ -40,7 +40,7 @@ public class AllomancyMovement : MonoBehaviour
     //Coin variables
     public int maxCoinCount = 10; // Maximum number of coins the player can carry
 
-    [SerializeField] private int coinCount = 0; // Number of coins the player currently has
+    public int coinCount = 10; // Number of coins the player currently has
 
 
     private List<GameObject> nearbyMetalObjects = new List<GameObject>();
@@ -52,8 +52,10 @@ public class AllomancyMovement : MonoBehaviour
     #endregion
     #region Start/Update
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
+        coinCount = maxCoinCount; // Initialize coin count to maximum at the start
         //startup code here
         rb = GetComponent<Rigidbody>();
         if (thirdPersonController == null)
@@ -73,7 +75,6 @@ public class AllomancyMovement : MonoBehaviour
         detectionTrigger = GetComponent<SphereCollider>();
         detectionTrigger.isTrigger = true;
         detectionTrigger.radius = detectionRadius;
-        coinCount = maxCoinCount; // Initialize coin count to max at the start
 
         Collider[] metalColliders = Physics.OverlapSphere(
             detectionTrigger.bounds.center,
@@ -189,7 +190,7 @@ public class AllomancyMovement : MonoBehaviour
     #endregion
 
 
-    #region Functions
+    #region Steel Push
 
     public void SteelPush(GameObject pushTarget)
     {
@@ -227,19 +228,25 @@ public class AllomancyMovement : MonoBehaviour
         thirdPersonController.ApplyExternalImpulse(
             pushDirection.normalized * pushForce * Time.deltaTime);
     }
+    #endregion
 
+    #region Iron Pull
     public void IronPull(GameObject pullTarget)
     {
         // Implement Iron Pull logic here
         print("Iron Pull activated");
     }
+    #endregion
 
+    #region Duralumin
     public void ActivateDuralumin()
     {
         // Implement Duralumin activation logic here
         print("Duralumin activated");
     }
+    #endregion
 
+    #region Coin Spawning
     public void SpawnCoin()
     {
         if (CoinPrefab == null)
@@ -257,6 +264,31 @@ public class AllomancyMovement : MonoBehaviour
             Debug.Log("No coins left to spawn.");
         }
     }
+    #endregion
+
+    public void AddCoin(int amount)
+    {
+        coinCount += amount;
+    }
+
+    #region SuckCoin
+    public void SuckCoins()
+    {
+        // Implement coin sucking logic here
+        foreach (GameObject metalObject in nearbyMetalObjects)
+        {
+            if (metalObject != null && metalObject.CompareTag("Coin"))
+            {
+                CoinScript coin = metalObject.GetComponent<CoinScript>();
+                if (coin != null)
+                {
+                    coin.suckActivated = true;
+                }
+            }
+        }
+        print("Sucking coins");
+    }
+#endregion
 
     GameObject FindSteelPushTarget(Vector3 direction)//Function for finding the closest metal object in the direction of the arrow
     {
@@ -335,5 +367,4 @@ public class AllomancyMovement : MonoBehaviour
         }
     }
 
-    #endregion
 }

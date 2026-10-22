@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 public class AllomancyInputs : MonoBehaviour
 {
     [SerializeField] private AllomancyMovement allomancy;
+    [SerializeField] private UIScript uiScript;
 
 
 
@@ -22,6 +23,12 @@ public class AllomancyInputs : MonoBehaviour
         if(Keyboard.current.eKey.wasPressedThisFrame)
         {
             TrySpawnCoin();
+            uiScript.UpdateCoinCount(allomancy.coinCount);
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            allomancy.SuckCoins();
         }
         
     }
