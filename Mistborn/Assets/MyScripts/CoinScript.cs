@@ -6,34 +6,37 @@ public class CoinScript : MonoBehaviour
     private Transform playerTransform;
     private GameObject player;
     public bool suckActivated = false;
+    private UIScript uIScript;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
-            Debug.LogError("Cannot ignore coin-player collision: no GameObject tagged 'Player' was found.", this);
+            Debug.LogError("Cannot find a GameObject tagged 'Player'.", this);
             return;
         }
 
-        CharacterController playerCollider = player.GetComponent<CharacterController>();
-        if (playerCollider == null)
+        AllomancyMovement movement = player.GetComponent<AllomancyMovement>();
+        if (movement == null || movement.AllomanticLineOrigin == null)
         {
-            Debug.LogError("Cannot ignore coin-player collision: the Player needs a CharacterController.", player);
+            Debug.LogError("Player needs an AllomancyMovement with its LinePoint assigned.", player);
             return;
         }
 
-        Collider[] coinColliders = GetComponentsInChildren<Collider>();
-        foreach (Collider coinCollider in coinColliders)
+        playerTransform = movement.AllomanticLineOrigin;
+
+        uIScript = FindAnyObjectByType<UIScript>();
+        if (uIScript == null)
         {
-            Physics.IgnoreCollision(playerCollider, coinCollider);
+            Debug.LogError("Cannot find UIScript in the active scene.", this);
         }
     }
 
     void Update()
     {
-        if (player != null && suckActivated)
+        if (playerTransform != null && suckActivated)
         {
-            FlytoPlayer(player.transform);
+            FlytoPlayer(playerTransform);
         }
     }
 
@@ -43,16 +46,27 @@ public class CoinScript : MonoBehaviour
         transform.position += direction * flySpeed * Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!suckActivated || other.isTrigger || !other.CompareTag("Player"))
+            return;
+
+        AllomancyMovement movement = other.GetComponentInParent<AllomancyMovement>();
+        if (movement == null)
         {
-            Destroy(this);
+            Debug.LogError("Player is missing AllomancyMovement.", other);
+            return;
         }
+
+        movement.AddCoin(1);
+        if (uIScript != null)
+            uIScript.UpdateCoinCount();
+
+        Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        print("coin gone");
+        uIScript.UpdateCoinCount();
     }
 }

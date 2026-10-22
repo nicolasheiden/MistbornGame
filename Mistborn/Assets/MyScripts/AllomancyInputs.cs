@@ -23,7 +23,7 @@ public class AllomancyInputs : MonoBehaviour
         if(Keyboard.current.eKey.wasPressedThisFrame)
         {
             TrySpawnCoin();
-            uiScript.UpdateCoinCount(allomancy.coinCount);
+            uiScript.UpdateCoinCount();
         }
 
         if (Keyboard.current.rKey.wasPressedThisFrame)

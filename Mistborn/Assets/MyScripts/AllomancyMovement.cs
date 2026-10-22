@@ -44,6 +44,7 @@ public class AllomancyMovement : MonoBehaviour
 
 
     private List<GameObject> nearbyMetalObjects = new List<GameObject>();
+    private Dictionary<GameObject, HashSet<Collider>> nearbyMetalColliders = new Dictionary<GameObject, HashSet<Collider>>();
     public GameObject selectedMetalObject = null; // The closest metal object in the direction of arrow
     [Range(0f, 180f)]
     public float selectionAngleThreshold = 30f; // Angle threshold for selecting the closest metal object
@@ -84,8 +85,7 @@ public class AllomancyMovement : MonoBehaviour
 
         foreach (Collider metalCollider in metalColliders)
         {
-            if (!nearbyMetalObjects.Contains(metalCollider.gameObject))
-                nearbyMetalObjects.Add(metalCollider.gameObject);
+            TrackMetalCollider(metalCollider);
         }
     }
 
@@ -349,22 +349,41 @@ public class AllomancyMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (((1 << other.gameObject.layer) & metalLayer) != 0)
-        {
-            if (!nearbyMetalObjects.Contains(other.gameObject)) //checks if already in the list
-                nearbyMetalObjects.Add(other.gameObject);
-        }
+            TrackMetalCollider(other);
     }
+
     void OnTriggerExit(Collider other)
     {
         if (((1 << other.gameObject.layer) & metalLayer) != 0)
         {
-            if (nearbyMetalObjects.Remove(other.gameObject))
-            {
-                LineRenderer lineRenderer = other.GetComponent<LineRenderer>();
-                if (lineRenderer != null)
-                    lineRenderer.positionCount = 0;
-            }
+            GameObject metalObject = other.gameObject;
+            if (!nearbyMetalColliders.TryGetValue(metalObject, out HashSet<Collider> colliders))
+                return;
+
+            colliders.Remove(other);
+            if (colliders.Count > 0)
+                return;
+
+            nearbyMetalColliders.Remove(metalObject);
+            nearbyMetalObjects.Remove(metalObject);
+
+            LineRenderer lineRenderer = metalObject.GetComponent<LineRenderer>();
+            if (lineRenderer != null)
+                lineRenderer.positionCount = 0;
         }
+    }
+
+    private void TrackMetalCollider(Collider metalCollider)
+    {
+        GameObject metalObject = metalCollider.gameObject;
+        if (!nearbyMetalColliders.TryGetValue(metalObject, out HashSet<Collider> colliders))
+        {
+            colliders = new HashSet<Collider>();
+            nearbyMetalColliders.Add(metalObject, colliders);
+            nearbyMetalObjects.Add(metalObject);
+        }
+
+        colliders.Add(metalCollider);
     }
 
 }

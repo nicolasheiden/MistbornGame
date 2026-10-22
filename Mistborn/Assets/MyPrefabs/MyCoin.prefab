@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8dc698185902343a4e230b2f3ef383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  flySpeed: 5
+  flySpeed: 50
   suckActivated: 0
 --- !u!135 &6380895127328462745
 SphereCollider:

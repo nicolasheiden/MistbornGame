@@ -542,7 +542,7 @@ Transform:
   m_GameObject: {fileID: 1650267886586176419}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06586134, y: -0.34492823, z: 0.024270736, w: -0.93600094}
-  m_LocalPosition: {x: 0.25, y: 1.79, z: -0.85}
+  m_LocalPosition: {x: 0, y: 1.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -774,7 +774,7 @@ MonoBehaviour:
   metalLayer:
     serializedVersion: 2
     m_Bits: 64
-  CoinPrefab: {fileID: 0}
+  CoinPrefab: {fileID: 2712649723675856626, guid: aa9f710eb1eebf74b8b079a3041b606b, type: 3}
   detectionRadius: 20
   lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
   arrowMaterial: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}

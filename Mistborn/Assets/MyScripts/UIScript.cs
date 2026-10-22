@@ -10,8 +10,8 @@ public class UIScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        UpdateCoinCount(allomancy.maxCoinCount); // Initialize the coin count display at the start
         
+        SetStartCoinCount();
     }
 
     // Update is called once per frame
@@ -20,9 +20,14 @@ public class UIScript : MonoBehaviour
         
     }
 
-    public void UpdateCoinCount(int newCoinCount)
+    public void UpdateCoinCount()
     {
-        CoinCountText.text = "Coins: " + newCoinCount.ToString();
+        CoinCountText.text = "Coins: " + allomancy.coinCount.ToString();
+    }
+
+    public void SetStartCoinCount()
+    {
+         CoinCountText.text = "Coins: " + allomancy.maxCoinCount.ToString();
     }
     
 
