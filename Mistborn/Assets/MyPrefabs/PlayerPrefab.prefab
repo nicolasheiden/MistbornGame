@@ -779,8 +779,11 @@ MonoBehaviour:
   lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
   arrowMaterial: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}
   selectedMaterial: {fileID: 2100000, guid: c0ec30e71366c6141803d6be36792a86, type: 2}
+  hoverMaterial: {fileID: 2100000, guid: c1bc02725fb791e42863641bb2033856, type: 2}
+  pullMaterial: {fileID: 2100000, guid: 35bec40549622474c8d128a964390a80, type: 2}
+  PullObject: {fileID: 0}
   pushForce: 20
-  pullForce: 10
+  pullForce: 30
   duraluminCD: 5
   debugArrowLength: 1
   debugArrowHeight: 1

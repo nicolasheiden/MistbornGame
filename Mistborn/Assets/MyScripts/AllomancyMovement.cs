@@ -10,6 +10,7 @@ public class AllomancyMovement : MonoBehaviour
     //references
     private Rigidbody rb;
     [SerializeField] private StarterAssets.ThirdPersonController thirdPersonController;
+    [SerializeField] private Camera aimCamera;
     public Transform AllomanticLineOrigin; // The origin point for the Allomantic line
     public GameObject user; // The character using Allomancy
     [SerializeField] private LayerMask metalLayer; // Layer mask for metal objects
@@ -21,10 +22,17 @@ public class AllomancyMovement : MonoBehaviour
     public Material lineMaterial; // Material for the Allomantic line
     public Material arrowMaterial; // Material for the debug arrow
     public Material selectedMaterial; // Material for the selected metal object
+    public Material hoverMaterial; //the material the line renderer gets when we look at the item.
+    public Material pullMaterial; //The material the line gets when we activate iron pull on the object.
+    public GameObject PullObject; // what we've selected as pull object
+    [SerializeField] private float pullSelectionAngle = 12f;
+    [SerializeField] private float pullSelectionRange = 30f;
+    [SerializeField] private float pullStopDistance = 1.5f;
+    private GameObject activePullObject;
     private bool isPushing = false;
     private bool isPulling = false;
     public float pushForce = 10f;
-    public float pullForce = 10f;
+    public float pullForce = 30f;
     private bool duraluminActive = false;
     public float duraluminCD = 5f; // Cooldown time for Duralumin
     private float duraluminTimer = 0f; // Timer to track Duralumin cooldown
@@ -63,6 +71,10 @@ public class AllomancyMovement : MonoBehaviour
             thirdPersonController = GetComponent<StarterAssets.ThirdPersonController>();
         if (thirdPersonController == null)
             Debug.LogError("AllomancyMovement requires a ThirdPersonController reference.", this);
+        if (aimCamera == null)
+            aimCamera = Camera.main;
+        if (aimCamera == null)
+            Debug.LogError("AllomancyMovement requires an aim camera or a camera tagged MainCamera.", this);
 
         if (lineMaterial == null)
             Debug.LogError("Assign a line material to render the movement debug arrow.", this);
@@ -112,6 +124,10 @@ public class AllomancyMovement : MonoBehaviour
         }
         UpdateDebugArrow();
 
+        selectedMetalObject = FindSteelPushTarget(-movementDirection);
+        PullObject = FindIronPullTarget();
+        UpdateIronPull();
+
         foreach (GameObject metalObject in nearbyMetalObjects)
         {
             if (metalObject != null)
@@ -119,7 +135,6 @@ public class AllomancyMovement : MonoBehaviour
                 DrawAllomanticLine(metalObject);
             }
         }
-        selectedMetalObject = FindSteelPushTarget(-movementDirection);
 
     }
 
@@ -233,8 +248,130 @@ public class AllomancyMovement : MonoBehaviour
     #region Iron Pull
     public void IronPull(GameObject pullTarget)
     {
-        // Implement Iron Pull logic here
-        print("Iron Pull activated");
+        if (pullTarget == null || !nearbyMetalObjects.Contains(pullTarget))
+        {
+            Debug.LogWarning("No nearby metal object is selected for Iron Pull.", this);
+            return;
+        }
+
+        if (thirdPersonController == null)
+        {
+            Debug.LogError("Cannot Iron Pull because ThirdPersonController is missing.", this);
+            return;
+        }
+
+        activePullObject = pullTarget;
+        isPulling = true;
+    }
+
+    public void StopIronPull()
+    {
+        isPulling = false;
+        activePullObject = null;
+    }
+
+    private GameObject FindIronPullTarget()
+    {
+        if (aimCamera == null)
+            return null;
+
+        GameObject bestTarget = null;
+        float smallestAngle = pullSelectionAngle;
+        float shortestDistance = float.MaxValue;
+        Vector3 cameraPosition = aimCamera.transform.position;
+        Vector3 cameraForward = aimCamera.transform.forward;
+
+        foreach (GameObject metalObject in nearbyMetalObjects)
+        {
+            if (metalObject == null)
+                continue;
+
+            Vector3 targetPoint = metalObject.transform.position;
+            Collider targetCollider = metalObject.GetComponent<Collider>();
+            if (targetCollider != null)
+                targetPoint = targetCollider.bounds.center;
+
+            Vector3 toTarget = targetPoint - cameraPosition;
+            float distance = toTarget.magnitude;
+            if (distance > pullSelectionRange || distance <= 0f)
+                continue;
+
+            float angle = Vector3.Angle(cameraForward, toTarget);
+            if (angle > pullSelectionAngle ||
+                (Mathf.Approximately(angle, smallestAngle) && distance >= shortestDistance))
+                continue;
+
+            if (!HasLineOfSightTo(metalObject, targetPoint, distance))
+                continue;
+
+            bestTarget = metalObject;
+            smallestAngle = angle;
+            shortestDistance = distance;
+        }
+
+        return bestTarget;
+    }
+
+    private bool HasLineOfSightTo(GameObject target, Vector3 targetPoint, float distance)
+    {
+        Vector3 direction = (targetPoint - aimCamera.transform.position).normalized;
+        int layerMask = ~(1 << gameObject.layer);
+
+        if (!Physics.Raycast(
+                aimCamera.transform.position,
+                direction,
+                out RaycastHit hit,
+                distance + 0.1f,
+                layerMask,
+                QueryTriggerInteraction.Collide))
+            return false;
+
+        return hit.transform == target.transform || hit.transform.IsChildOf(target.transform);
+    }
+
+    private void UpdateIronPull()
+    {
+        if (!isPulling)
+            return;
+
+        if (activePullObject == null || !nearbyMetalObjects.Contains(activePullObject))
+        {
+            StopIronPull();
+            return;
+        }
+
+        Vector3 targetPoint = GetClosestPointOnTarget(activePullObject, transform.position);
+        Vector3 pullDirection = targetPoint - transform.position;
+        if (pullDirection.magnitude <= pullStopDistance)
+            return;
+
+        thirdPersonController.ApplyExternalImpulse(
+            pullDirection.normalized * pullForce * Time.deltaTime);
+    }
+
+    private Vector3 GetClosestPointOnTarget(GameObject target, Vector3 position)
+    {
+        Vector3 closestPoint = target.transform.position;
+        float closestDistanceSquared = float.MaxValue;
+
+        if (nearbyMetalColliders.TryGetValue(target, out HashSet<Collider> colliders))
+        {
+            foreach (Collider targetCollider in colliders)
+            {
+                if (targetCollider == null || !targetCollider.enabled)
+                    continue;
+
+                Vector3 point = targetCollider.ClosestPoint(position);
+                float distanceSquared = (point - position).sqrMagnitude;
+                if (distanceSquared < closestDistanceSquared)
+                {
+                    closestPoint = point;
+                    closestDistanceSquared = distanceSquared;
+                }
+            }
+        }
+
+        return closestPoint;
     }
     #endregion
 
@@ -314,10 +451,7 @@ public class AllomancyMovement : MonoBehaviour
         }
         if (closestMetalObject != null)
         {
-            LineRenderer lineRenderer = closestMetalObject.GetComponent<LineRenderer>();
-            if (lineRenderer != null)
-                lineRenderer.material = selectedMaterial;
-            else
+            if (closestMetalObject.GetComponent<LineRenderer>() == null)
                 Debug.LogError($"Metal object '{closestMetalObject.name}' needs a LineRenderer component.", closestMetalObject);
         }
 
@@ -341,7 +475,15 @@ public class AllomancyMovement : MonoBehaviour
         lineRenderer.SetPosition(1, metalObject.transform.position);
 
         //LineRenderer Variable update
-        lineRenderer.material = lineMaterial;
+        Material lineMaterialToUse = lineMaterial;
+        if (metalObject == selectedMetalObject && selectedMaterial != null)
+            lineMaterialToUse = selectedMaterial;
+        if (metalObject == PullObject && hoverMaterial != null)
+            lineMaterialToUse = hoverMaterial;
+        if (isPulling && metalObject == activePullObject && pullMaterial != null)
+            lineMaterialToUse = pullMaterial;
+
+        lineRenderer.material = lineMaterialToUse;
         lineRenderer.startWidth = 0.05f;
         lineRenderer.endWidth = 0.05f;
     }
@@ -366,6 +508,10 @@ public class AllomancyMovement : MonoBehaviour
 
             nearbyMetalColliders.Remove(metalObject);
             nearbyMetalObjects.Remove(metalObject);
+            if (PullObject == metalObject)
+                PullObject = null;
+            if (activePullObject == metalObject)
+                StopIronPull();
 
             LineRenderer lineRenderer = metalObject.GetComponent<LineRenderer>();
             if (lineRenderer != null)

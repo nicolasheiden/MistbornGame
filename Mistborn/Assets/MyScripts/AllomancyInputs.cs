@@ -14,9 +14,18 @@ public class AllomancyInputs : MonoBehaviour
             TrySteelPush();
         }
 
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+        if (Mouse.current == null)
         {
-            TryIronPull();
+            if (allomancy != null)
+                allomancy.StopIronPull();
+        }
+        else
+        {
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+                TryIronPull();
+
+            if (Mouse.current.rightButton.wasReleasedThisFrame && allomancy != null)
+                allomancy.StopIronPull();
         }
         //duralumin activation here
 
@@ -42,7 +51,13 @@ public class AllomancyInputs : MonoBehaviour
 
     void TryIronPull()
     {
-        //allomancy.IronPull(allomancy.selectedMetalObject);
+        if (allomancy == null)
+            return;
+
+        if (allomancy.PullObject != null)
+            allomancy.IronPull(allomancy.PullObject);
+        else
+            allomancy.StopIronPull();
     }
 
     void TryActivateDuralumin()
