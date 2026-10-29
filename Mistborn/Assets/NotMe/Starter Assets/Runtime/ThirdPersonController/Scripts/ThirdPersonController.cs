@@ -373,6 +373,8 @@ namespace StarterAssets
             _externalVelocity += impulse;
         }
 
+        public Vector3 CurrentVelocity => _controller.velocity;
+
         #endregion
 
         #region Jumping and Gravity

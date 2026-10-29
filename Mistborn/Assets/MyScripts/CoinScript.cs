@@ -37,6 +37,9 @@ public class CoinScript : MonoBehaviour
         if (playerTransform != null && suckActivated)
         {
             FlytoPlayer(playerTransform);
+
+            if (Vector3.Distance(transform.position, playerTransform.position) <= 0.5f)
+                Collect();
         }
     }
 
@@ -51,10 +54,15 @@ public class CoinScript : MonoBehaviour
         if (!suckActivated || other.isTrigger || !other.CompareTag("Player"))
             return;
 
-        AllomancyMovement movement = other.GetComponentInParent<AllomancyMovement>();
+        Collect();
+    }
+
+    private void Collect()
+    {
+        AllomancyMovement movement = player.GetComponent<AllomancyMovement>();
         if (movement == null)
         {
-            Debug.LogError("Player is missing AllomancyMovement.", other);
+            Debug.LogError("Player is missing AllomancyMovement.", player);
             return;
         }
 

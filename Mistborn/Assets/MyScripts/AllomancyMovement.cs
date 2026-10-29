@@ -33,6 +33,7 @@ public class AllomancyMovement : MonoBehaviour
     private bool isPulling = false;
     public float pushForce = 10f;
     public float pullForce = 30f;
+    public float coinSpawnSpeed = 5f; // Initial speed of a spawned coin
     private bool duraluminActive = false;
     public float duraluminCD = 5f; // Cooldown time for Duralumin
     private float duraluminTimer = 0f; // Timer to track Duralumin cooldown
@@ -301,32 +302,12 @@ public class AllomancyMovement : MonoBehaviour
                 (Mathf.Approximately(angle, smallestAngle) && distance >= shortestDistance))
                 continue;
 
-            if (!HasLineOfSightTo(metalObject, targetPoint, distance))
-                continue;
-
             bestTarget = metalObject;
             smallestAngle = angle;
             shortestDistance = distance;
         }
 
         return bestTarget;
-    }
-
-    private bool HasLineOfSightTo(GameObject target, Vector3 targetPoint, float distance)
-    {
-        Vector3 direction = (targetPoint - aimCamera.transform.position).normalized;
-        int layerMask = ~(1 << gameObject.layer);
-
-        if (!Physics.Raycast(
-                aimCamera.transform.position,
-                direction,
-                out RaycastHit hit,
-                distance + 0.1f,
-                layerMask,
-                QueryTriggerInteraction.Collide))
-            return false;
-
-        return hit.transform == target.transform || hit.transform.IsChildOf(target.transform);
     }
 
     private void UpdateIronPull()
@@ -393,7 +374,37 @@ public class AllomancyMovement : MonoBehaviour
         }
         else if (coinCount != 0)
         {
-            Instantiate(CoinPrefab, transform.position + Vector3.up, Quaternion.Euler(-90f, 0f, 0f));
+            Vector3 spawnDirection = -movementDirection;
+            if (spawnDirection.sqrMagnitude <= 0.0001f)
+                spawnDirection = Vector3.down;
+            spawnDirection = spawnDirection.normalized;
+
+            Vector3 spawnPosition = transform.position + Vector3.up + spawnDirection * 0.5f;
+            GameObject coin = Instantiate(CoinPrefab, spawnPosition, Quaternion.Euler(-90f, 0f, 0f));
+
+            Rigidbody coinRb = coin.GetComponent<Rigidbody>();
+            if (coinRb != null)
+            {
+                Vector3 playerVelocity = thirdPersonController != null
+                    ? thirdPersonController.CurrentVelocity
+                    : Vector3.zero;
+                coinRb.linearVelocity = spawnDirection * coinSpawnSpeed + playerVelocity;
+            }
+
+            Collider[] playerColliders = GetComponentsInChildren<Collider>();
+            Collider[] coinColliders = coin.GetComponentsInChildren<Collider>();
+            foreach (Collider playerCollider in playerColliders)
+            {
+                if (playerCollider == null || playerCollider.isTrigger)
+                    continue;
+
+                foreach (Collider coinCollider in coinColliders)
+                {
+                    if (coinCollider != null)
+                        Physics.IgnoreCollision(playerCollider, coinCollider);
+                }
+            }
+
             coinCount--;
         }
         else
