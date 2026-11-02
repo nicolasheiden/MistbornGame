@@ -21,6 +21,7 @@ public class AllomancyInputs : MonoBehaviour
             ironPullPressed |= Gamepad.current.leftTrigger.wasPressedThisFrame;
             ironPullReleased |= Gamepad.current.leftTrigger.wasReleasedThisFrame;
             spawnCoinPressed |= Gamepad.current.buttonNorth.wasPressedThisFrame;
+            suckCoinsPressed |= Gamepad.current.buttonEast.wasPressedThisFrame;
         }
 
         if (steelPushHeld)

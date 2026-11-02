@@ -5033,6 +5033,10 @@ PrefabInstance:
       value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: GamepadLookSensitivity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: _airControlAcceleration
       value: 15
       objectReference: {fileID: 0}
@@ -6919,9 +6923,29 @@ PrefabInstance:
       propertyPath: allomancy
       value: 
       objectReference: {fileID: 826651683}
+    - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4400115458381471349, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_Name
       value: MistbornCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815948488628792708, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815948488628792708, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6991441221523842324, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_Pivot.x

@@ -16,6 +16,12 @@ namespace StarterAssets
     {
         #region Inspector Settings
 
+        [Header("My Variables and Settings")]
+        [Tooltip("Look sensitivity multiplier applied to gamepad input only")]
+        [Range(0.1f, 5.0f)]
+        public float GamepadLookSensitivity = 1.0f;
+
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -76,6 +82,8 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+
+        
 
         #endregion
 
@@ -240,7 +248,7 @@ namespace StarterAssets
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime * GamepadLookSensitivity;
 
                 _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
