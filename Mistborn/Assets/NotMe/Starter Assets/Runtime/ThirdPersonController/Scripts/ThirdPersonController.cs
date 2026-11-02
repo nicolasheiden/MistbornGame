@@ -375,6 +375,16 @@ namespace StarterAssets
 
         public Vector3 CurrentVelocity => _controller.velocity;
 
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            // Ignore ground hits; only strip velocity pushing us into walls/ceilings
+            if (hit.normal.y >= 0.5f)
+                return;
+
+            _externalVelocity = Vector3.ProjectOnPlane(_externalVelocity, hit.normal);
+            _airMoveVelocity = Vector3.ProjectOnPlane(_airMoveVelocity, hit.normal);
+        }
+
         #endregion
 
         #region Jumping and Gravity

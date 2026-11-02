@@ -9,37 +9,43 @@ public class AllomancyInputs : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.isPressed)
+        bool steelPushHeld = Mouse.current != null && Mouse.current.leftButton.isPressed;
+        bool ironPullPressed = Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame;
+        bool ironPullReleased = Mouse.current != null && Mouse.current.rightButton.wasReleasedThisFrame;
+        bool spawnCoinPressed = Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame;
+        bool suckCoinsPressed = Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame;
+
+        if (Gamepad.current != null)
+        {
+            steelPushHeld |= Gamepad.current.rightTrigger.isPressed;
+            ironPullPressed |= Gamepad.current.leftTrigger.wasPressedThisFrame;
+            ironPullReleased |= Gamepad.current.leftTrigger.wasReleasedThisFrame;
+            spawnCoinPressed |= Gamepad.current.buttonNorth.wasPressedThisFrame;
+        }
+
+        if (steelPushHeld)
         {
             TrySteelPush();
         }
 
-        if (Mouse.current == null)
-        {
-            if (allomancy != null)
-                allomancy.StopIronPull();
-        }
-        else
-        {
-            if (Mouse.current.rightButton.wasPressedThisFrame)
-                TryIronPull();
+        if (ironPullPressed)
+            TryIronPull();
 
-            if (Mouse.current.rightButton.wasReleasedThisFrame && allomancy != null)
-                allomancy.StopIronPull();
-        }
+        if (ironPullReleased && allomancy != null)
+            allomancy.StopIronPull();
+
         //duralumin activation here
 
-        if(Keyboard.current.eKey.wasPressedThisFrame)
+        if (spawnCoinPressed)
         {
             TrySpawnCoin();
             uiScript.UpdateCoinCount();
         }
 
-        if (Keyboard.current.rKey.wasPressedThisFrame)
+        if (suckCoinsPressed)
         {
             allomancy.SuckCoins();
         }
-        
     }
 
 
