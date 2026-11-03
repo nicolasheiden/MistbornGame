@@ -5122,6 +5122,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7756120866615365255, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
   m_PrefabInstance: {fileID: 1608620940}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1608620942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+  m_PrefabInstance: {fileID: 1608620940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1621010469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6923,29 +6934,41 @@ PrefabInstance:
       propertyPath: allomancy
       value: 
       objectReference: {fileID: 826651683}
+    - target: {fileID: 2929236507482278307, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: thirdPersonController
+      value: 
+      objectReference: {fileID: 1608620942}
     - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3593521829247983116, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4400115458381471349, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_Name
       value: MistbornCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5815948488628792708, guid: de879b16e89df7a429e554793966fcaa, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 5466382550851288795, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673402733702917881, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5815948488628792708, guid: de879b16e89df7a429e554793966fcaa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815948488628792708, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6991441221523842324, guid: de879b16e89df7a429e554793966fcaa, type: 3}
       propertyPath: m_Pivot.x
@@ -7036,6 +7059,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 4940121434421753628}
   - {fileID: 1608620940}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -7047,7 +7071,6 @@ SceneRoots:
   - {fileID: 855239482}
   - {fileID: 2074627193}
   - {fileID: 131268133}
-  - {fileID: 4940121434421753628}
   - {fileID: 904411491}
   - {fileID: 156654542}
   - {fileID: 599455688}

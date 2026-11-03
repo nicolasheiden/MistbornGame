@@ -21,6 +21,8 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
+		private PlayerInput _playerInput;
+
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -41,7 +43,20 @@ namespace StarterAssets
 
 		public void OnSprint(InputValue value)
 		{
-			SprintInput(value.isPressed);
+			if (_playerInput == null)
+				_playerInput = GetComponent<PlayerInput>();
+
+			bool isGamepad = _playerInput != null && _playerInput.currentControlScheme == "Gamepad";
+
+			if (isGamepad)
+			{
+				if (value.isPressed)
+					SprintInput(!sprint);
+			}
+			else
+			{
+				SprintInput(value.isPressed);
+			}
 		}
 #endif
 

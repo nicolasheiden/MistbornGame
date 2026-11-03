@@ -263,6 +263,11 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
+        public void updateSensitivity(float newSensitivity)
+        {
+            GamepadLookSensitivity = newSensitivity;
+        }
+
         #endregion
 
         #region Movement

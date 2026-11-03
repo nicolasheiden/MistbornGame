@@ -9,11 +9,15 @@ public class AllomancyInputs : MonoBehaviour
 
     void Update()
     {
+        // Captured before toggling so the press that closes the menu isn't also used as a gameplay input.
+        bool wasPaused = uiScript != null && uiScript.IsPauseMenuActive;
+
         bool steelPushHeld = Mouse.current != null && Mouse.current.leftButton.isPressed;
         bool ironPullPressed = Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame;
         bool ironPullReleased = Mouse.current != null && Mouse.current.rightButton.wasReleasedThisFrame;
         bool spawnCoinPressed = Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame;
         bool suckCoinsPressed = Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame;
+        bool togglePauseMenuPressed = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
 
         if (Gamepad.current != null)
         {
@@ -22,7 +26,23 @@ public class AllomancyInputs : MonoBehaviour
             ironPullReleased |= Gamepad.current.leftTrigger.wasReleasedThisFrame;
             spawnCoinPressed |= Gamepad.current.buttonNorth.wasPressedThisFrame;
             suckCoinsPressed |= Gamepad.current.buttonEast.wasPressedThisFrame;
+            togglePauseMenuPressed |= Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame;
+
+            if (wasPaused)
+                togglePauseMenuPressed |= Gamepad.current.buttonEast.wasPressedThisFrame;
         }
+
+        if (togglePauseMenuPressed)
+        {
+            TryTogglePauseMenu();
+        }
+
+        // Release is still handled while paused so a pull doesn't stay stuck on resume.
+        if (ironPullReleased && allomancy != null)
+            allomancy.StopIronPull();
+
+        if (wasPaused || (uiScript != null && uiScript.IsPauseMenuActive))
+            return;
 
         if (steelPushHeld)
         {
@@ -31,9 +51,6 @@ public class AllomancyInputs : MonoBehaviour
 
         if (ironPullPressed)
             TryIronPull();
-
-        if (ironPullReleased && allomancy != null)
-            allomancy.StopIronPull();
 
         //duralumin activation here
 
@@ -75,6 +92,12 @@ public class AllomancyInputs : MonoBehaviour
     void TrySpawnCoin()
     {
         allomancy.SpawnCoin();
+    }
+
+    void TryTogglePauseMenu()
+    {
+        if (uiScript != null)
+            uiScript.TogglePauseMenu();
     }
 
 }
