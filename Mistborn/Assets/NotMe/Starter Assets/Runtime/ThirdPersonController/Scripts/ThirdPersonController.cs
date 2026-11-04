@@ -20,6 +20,11 @@ namespace StarterAssets
         [Tooltip("Look sensitivity multiplier applied to gamepad input only")]
         [Range(0.1f, 5.0f)]
         public float GamepadLookSensitivity = 1.0f;
+        public ParticleSystem SpeedLinesSlow;
+        public ParticleSystem SpeedLinesFast;
+        public float SlowSpeedLineThreshold = 2.0f;
+        public float FastSpeedLineThreshold = 5.0f;
+        [SerializeField] private float ActualSpeed;
 
 
         [Header("Player")]
@@ -190,6 +195,11 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
             _wasGrounded = Grounded;
+
+            ActualSpeed = _controller.velocity.magnitude;
+
+            SpeedLinesFast.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            SpeedLinesSlow.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
         private void Update()
@@ -199,6 +209,12 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            ActualSpeed = _controller.velocity.magnitude;
+
+            UpdateSpeedLines(); //Turns on speedlines depending on Speed.
+
+            //Debug.Log("Speed: " + ActualSpeed);
         }
 
         private void LateUpdate()
@@ -266,6 +282,22 @@ namespace StarterAssets
         public void updateSensitivity(float newSensitivity)
         {
             GamepadLookSensitivity = newSensitivity;
+        }
+
+
+        private void UpdateSpeedLines(){
+            if(ActualSpeed >= SlowSpeedLineThreshold && ActualSpeed < FastSpeedLineThreshold){ //plays slow speed lines when faster than slow threshhold and fast and slow speed lines when faster than fast threshhold
+                if(!SpeedLinesSlow.isPlaying)
+                    SpeedLinesSlow.Play();
+                    SpeedLinesFast.Stop();
+            } else if(ActualSpeed >= FastSpeedLineThreshold){
+                if(!SpeedLinesFast.isPlaying)
+                    SpeedLinesFast.Play();
+            }
+            else{
+                SpeedLinesSlow.Stop();
+                SpeedLinesFast.Stop();
+            }
         }
 
         #endregion
