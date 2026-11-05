@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Unity.Cinemachine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -25,6 +26,13 @@ namespace StarterAssets
         public float SlowSpeedLineThreshold = 2.0f;
         public float FastSpeedLineThreshold = 5.0f;
         [SerializeField] private float ActualSpeed;
+        [SerializeField] private float HorizontalSpeed;
+        public float BaseFOV = 60.0f;
+        public float MediumFov = 75.0f;
+        public float MaxFov = 90.0f;
+        public float FovChangeSpeed = 5.0f;
+        [Tooltip("The Cinemachine camera whose lens FOV is driven by player speed")]
+        public CinemachineCamera PlayerFollowCamera;
 
 
         [Header("Player")]
@@ -196,6 +204,9 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
             _wasGrounded = Grounded;
 
+            if (PlayerFollowCamera == null)
+                PlayerFollowCamera = FindFirstObjectByType<CinemachineCamera>();
+
             ActualSpeed = _controller.velocity.magnitude;
 
             SpeedLinesFast.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -211,8 +222,11 @@ namespace StarterAssets
             Move();
 
             ActualSpeed = _controller.velocity.magnitude;
+            Vector3 velocity = _controller.velocity;
+            HorizontalSpeed = new Vector3(velocity.x, 0.0f, velocity.z).magnitude;
 
             UpdateSpeedLines(); //Turns on speedlines depending on Speed.
+            UpdateFOV(); //Updates the camera field of view based on speed.
 
             //Debug.Log("Speed: " + ActualSpeed);
         }
@@ -286,18 +300,34 @@ namespace StarterAssets
 
 
         private void UpdateSpeedLines(){
-            if(ActualSpeed >= SlowSpeedLineThreshold && ActualSpeed < FastSpeedLineThreshold){ //plays slow speed lines when faster than slow threshhold and fast and slow speed lines when faster than fast threshhold
-                if(!SpeedLinesSlow.isPlaying)
-                    SpeedLinesSlow.Play();
-                    SpeedLinesFast.Stop();
+            bool slowActive = HorizontalSpeed >= SlowSpeedLineThreshold; //slow lines play above the slow threshold, fast lines are added above the fast threshold
+            bool fastActive = HorizontalSpeed >= FastSpeedLineThreshold;
+
+            SetEmitting(SpeedLinesSlow, slowActive);
+            SetEmitting(SpeedLinesFast, fastActive);
+        }
+
+        // isPlaying stays true while leftover particles fade out after Stop(), so check isEmitting instead
+        private static void SetEmitting(ParticleSystem ps, bool shouldEmit){
+            if(shouldEmit && !ps.isEmitting)
+                ps.Play();
+            else if(!shouldEmit && ps.isEmitting)
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+
+        private void UpdateFOV(){
+            float targetFov = BaseFOV;
+            if(ActualSpeed >= SlowSpeedLineThreshold && ActualSpeed < FastSpeedLineThreshold){
+                targetFov = MediumFov;
             } else if(ActualSpeed >= FastSpeedLineThreshold){
-                if(!SpeedLinesFast.isPlaying)
-                    SpeedLinesFast.Play();
+                targetFov = MaxFov;
             }
-            else{
-                SpeedLinesSlow.Stop();
-                SpeedLinesFast.Stop();
-            }
+            if (PlayerFollowCamera == null) return;
+
+            // Lens is a struct, so copy it, modify, and assign it back
+            LensSettings lens = PlayerFollowCamera.Lens;
+            lens.FieldOfView = Mathf.Lerp(lens.FieldOfView, targetFov, Time.deltaTime * FovChangeSpeed);
+            PlayerFollowCamera.Lens = lens;
         }
 
         #endregion

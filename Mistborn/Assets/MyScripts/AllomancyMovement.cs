@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 //using UnityEngine.Events;
 
 public class AllomancyMovement : MonoBehaviour
