@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1838183277020424504}
   - component: {fileID: 1750679432799610271}
   - component: {fileID: 2799756889920460164}
+  - component: {fileID: 4645647129017305258}
   m_Layer: 0
   m_Name: ClothMistcloak
   m_TagString: Untagged
@@ -140,7 +141,7 @@ Cloth:
   m_Damping: 0
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
-  m_WorldVelocityScale: 0.5
+  m_WorldVelocityScale: 1
   m_WorldAccelerationScale: 1
   m_Friction: 0.5
   m_CollisionMassScale: 0
@@ -391,7 +392,10 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 3.4028235e+38
     collisionSphereDistance: 3.4028235e+38
-  m_CapsuleColliders: []
+  m_CapsuleColliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
@@ -401,3 +405,25 @@ Cloth:
   - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
   - {x: 0.5, y: 0.5, z: 0}
   m_VirtualParticleIndices: 
+--- !u!114 &4645647129017305258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4366687276715758459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c4e4f6741172445b4ecaa9c53de901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MistcloakWind
+  player: {fileID: 0}
+  maxSpeed: 20
+  ambientWindDirection: {x: 1, y: 0, z: 0.3}
+  ambientStrength: 3
+  gustStrength: 2
+  gustSpeed: 0.6
+  speedWindMultiplier: 1.2
+  baseTurbulence: 10
+  speedTurbulence: 60
+  smoothing: 6
