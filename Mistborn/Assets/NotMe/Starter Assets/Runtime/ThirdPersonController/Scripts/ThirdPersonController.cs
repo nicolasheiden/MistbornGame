@@ -207,7 +207,7 @@ namespace StarterAssets
             if (PlayerFollowCamera == null)
                 PlayerFollowCamera = FindFirstObjectByType<CinemachineCamera>();
 
-            ActualSpeed = _controller.velocity.magnitude;
+            //ActualSpeed = _controller.velocity.magnitude;
 
             SpeedLinesFast.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             SpeedLinesSlow.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);

@@ -5240,6 +5240,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1910564548}
     - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: PlayerFollowCamera
+      value: 
+      objectReference: {fileID: 1924469218}
+    - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: FastSpeedLineThreshold
       value: 40
       objectReference: {fileID: 0}
@@ -5255,13 +5259,221 @@ PrefabInstance:
       propertyPath: _airControlAcceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582840758889323253, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1817810406233457524, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: uiScript
       value: 
       objectReference: {fileID: 1303182552}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904952467600303171, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118999736118229084, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2400764600020743222, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463476646541116640, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970058244569615546, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010691918819557857, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224952898952923499, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3707850915613493829, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: m_IsActive
@@ -5311,13 +5523,169 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.217
       objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941044214357514702, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360214769011659845, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722451305296534735, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1608620944}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftBase
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734735171731607956, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6136455600443136560, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6227175093434397778, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7390109773832552338, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: m_IsActive
@@ -5351,6 +5719,54 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310683056714352603, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_Damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_BendingStiffness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993085171139574125, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: m_WorldAccelerationScale
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5372,6 +5788,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &1608620944 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 5272755997635283220, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+  m_PrefabInstance: {fileID: 1608620940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1621010469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7109,63 +7530,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1721571824}
   m_SourcePrefab: {fileID: 100100000, guid: 353543c087e503c4887c5a0a7dd48314, type: 3}
---- !u!1001 &3430401057110858005
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.68733
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.837
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 63.50865
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3741813843302571908, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366687276715758459, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
-      propertyPath: m_Name
-      value: ClothMistcloak
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
 --- !u!1001 &3571573252205205814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7428,4 +7792,3 @@ SceneRoots:
   - {fileID: 930209323}
   - {fileID: 1551353210}
   - {fileID: 1185882802}
-  - {fileID: 3430401057110858005}
