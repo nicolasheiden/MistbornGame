@@ -103,10 +103,10 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Coverage: 0.4
+    - _Coverage: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Density: 0.2
+    - _Density: 0.15
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -144,7 +144,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MistColor: {r: 0.75, g: 0.78, b: 0.85, a: 1}
+    - _MistColor: {r: 0.4462442, g: 0.57676435, b: 0.8679245, a: 1}
     - _ShadowColor: {r: 0.34999996, g: 0.37999994, b: 0.47999996, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Wind: {r: 0.1, g: 0.02, b: 0.05, a: 0}

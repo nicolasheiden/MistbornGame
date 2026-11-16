@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 555781209582074515}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0021993578, y: -0.7079694, z: 0.00047255273, w: 0.7062396}
-  m_LocalPosition: {x: 0.06, y: 1.29, z: 0.16}
+  m_LocalPosition: {x: -0, y: 1, z: 0.01}
   m_LocalScale: {x: 20, y: 10, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -942,6 +942,7 @@ GameObject:
   - component: {fileID: 5067167862125475344}
   - component: {fileID: 2452739880280520610}
   - component: {fileID: 7073488926855319926}
+  - component: {fileID: 3759238650757299497}
   m_Layer: 7
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -1300,6 +1301,38 @@ MonoBehaviour:
   player: {fileID: 5272755997635283220}
   heightOffset: 1
   velocitySmoothing: 5
+--- !u!114 &3759238650757299497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400764600020743222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd74ef14cc98b1e4da5d88a4165b1599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AshfallEffect
+  player: {fileID: 5272755997635283220}
+  shader: {fileID: 4800000, guid: ff986dc6bf965934b80f82e00935fd9e, type: 3}
+  volumeSize: {x: 40, y: 14, z: 40}
+  maxParticles: 5000
+  emissionRate: 280
+  emissionPerMeter: 80
+  lifetime: {x: 8, y: 15}
+  leadTime: 2
+  maxLead: 20
+  velocitySmoothing: 6
+  flakeSize: {x: 0.03, y: 0.1}
+  ashColorA: {r: 0.1, g: 0.09, b: 0.085, a: 0.9}
+  ashColorB: {r: 0.32, g: 0.3, b: 0.28, a: 0.7}
+  softParticleDistance: 0.3
+  fallSpeed: 0.6
+  wind: {x: 0.5, y: 0, z: 0.2}
+  flutterStrength: 0.4
+  flutterFrequency: 0.3
+  spin: 1.5
+  killOnGround: 1
 --- !u!1 &2668624242383159689
 GameObject:
   m_ObjectHideFlags: 0
