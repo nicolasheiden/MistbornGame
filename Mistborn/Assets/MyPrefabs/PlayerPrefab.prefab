@@ -96,6 +96,96 @@ Transform:
   - {fileID: 1957696756295691455}
   m_Father: {fileID: 2203798219463880748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &555781209582074515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7878092638719667198}
+  - component: {fileID: 7297114762287504495}
+  - component: {fileID: 2496905159798790962}
+  m_Layer: 0
+  m_Name: MistVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7878092638719667198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555781209582074515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0021993578, y: -0.7079694, z: 0.00047255273, w: 0.7062396}
+  m_LocalPosition: {x: 0.06, y: 1.29, z: 0.16}
+  m_LocalScale: {x: 20, y: 10, z: 20}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4504083774519649401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7297114762287504495
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555781209582074515}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2496905159798790962
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555781209582074515}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 474a9a6d76c7f3647b144635f7e09f1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &563140177777522048
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +941,7 @@ GameObject:
   - component: {fileID: 723247458894302269}
   - component: {fileID: 5067167862125475344}
   - component: {fileID: 2452739880280520610}
+  - component: {fileID: 7073488926855319926}
   m_Layer: 7
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -874,6 +965,7 @@ Transform:
   - {fileID: 7756120866615365255}
   - {fileID: 7846032076925694263}
   - {fileID: 5977902446228242180}
+  - {fileID: 7878092638719667198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 106.241, z: 0}
 --- !u!114 &7548177786683226279
@@ -896,18 +988,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CoinPrefab: {fileID: 2712649723675856626, guid: aa9f710eb1eebf74b8b079a3041b606b, type: 3}
-  detectionRadius: 20
+  detectionRadius: 30
   lineMaterial: {fileID: 2100000, guid: 50b7c3d4474cf7548b984d7a716a297c, type: 2}
   arrowMaterial: {fileID: 2100000, guid: dcf6128f37b176c42baffb0ecd1fcade, type: 2}
   selectedMaterial: {fileID: 2100000, guid: c0ec30e71366c6141803d6be36792a86, type: 2}
   hoverMaterial: {fileID: 2100000, guid: c1bc02725fb791e42863641bb2033856, type: 2}
   pullMaterial: {fileID: 2100000, guid: 35bec40549622474c8d128a964390a80, type: 2}
   PullObject: {fileID: 0}
-  pullSelectionAngle: 12
-  pullSelectionRange: 30
+  pullSelectionAngle: 20
+  pullSelectionRange: 40
   pullStopDistance: 1.5
-  pushForce: 20
-  pullForce: 30
+  pushForce: 30
+  pullForce: 40
   coinSpawnSpeed: 5
   duraluminCD: 5
   debugArrowLength: 1
@@ -942,16 +1034,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamepadLookSensitivity: 1
+  GamepadLookSensitivity: 0.5
   SpeedLinesSlow: {fileID: 0}
   SpeedLinesFast: {fileID: 0}
-  SlowSpeedLineThreshold: 2
-  FastSpeedLineThreshold: 5
+  SlowSpeedLineThreshold: 15
+  FastSpeedLineThreshold: 40
   ActualSpeed: 0
   HorizontalSpeed: 0
-  BaseFOV: 60
-  MediumFov: 75
-  MaxFov: 90
+  BaseFOV: 40
+  MediumFov: 60
+  MaxFov: 70
   FovChangeSpeed: 5
   PlayerFollowCamera: {fileID: 0}
   MoveSpeed: 4
@@ -982,14 +1074,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   CinemachineCameraTarget: {fileID: 1650267886586176419}
-  TopClamp: 70
-  BottomClamp: -30
+  TopClamp: 90
+  BottomClamp: -60
   CameraAngleOverride: 0
   LockCameraPosition: 0
   _externalVelocityDamping: 3
   _groundedExternalVelocityDamping: 10
   _landingHorizontalVelocityMultiplier: 0.25
-  _airControlAcceleration: 8
+  _airControlAcceleration: 15
   _airDrag: 0.2
 --- !u!95 &7130583386377995171
 Animator:
@@ -1193,6 +1285,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7073488926855319926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400764600020743222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d597d7f711f0f45a6f22fead572ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MistPlayerInteraction
+  player: {fileID: 5272755997635283220}
+  heightOffset: 1
+  velocitySmoothing: 5
 --- !u!1 &2668624242383159689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,15 +3175,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -3084,7 +3203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -3646,6 +3765,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3666,15 +3817,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -3682,7 +3845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -4244,6 +4407,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4264,15 +4459,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -4280,7 +4487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -4842,6 +5049,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6058,15 +6297,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -6074,7 +6325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -6636,6 +6887,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6656,15 +6939,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -6672,7 +6967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -7234,6 +7529,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7852,15 +8179,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Damping
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_Friction
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_SolverFrequency
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_BendingStiffness
-      value: 0.1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_WorldVelocityScale
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: m_StretchingStiffness
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_RandomAcceleration.z
@@ -7868,7 +8207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: m_WorldAccelerationScale
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799756889920460164, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
       propertyPath: 'm_CapsuleColliders.Array.data[0]'
@@ -8430,6 +8769,38 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5272755997635283220}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: liftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: smoothing
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: gustStrength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: baseTurbulence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: ambientStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedTurbulence
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645647129017305258, guid: edfad62c445b74a419b5e5fb8d4b4bf6, type: 3}
+      propertyPath: speedWindMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
