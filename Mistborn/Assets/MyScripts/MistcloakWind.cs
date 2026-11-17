@@ -9,22 +9,22 @@ public class MistcloakWind : MonoBehaviour
 
     [Header("Ambient wind")]
     [SerializeField] Vector3 ambientWindDirection = new Vector3(1f, 0f, 0.3f);
-    [SerializeField] float ambientStrength = 3f;
-    [SerializeField] float gustStrength = 2f;
-    [SerializeField] float gustSpeed = 0.6f;
+    [SerializeField] float ambientStrength = 2f;
+    [SerializeField] float gustStrength = 1f;
+    [SerializeField] float gustSpeed = 0.2f;
 
     [Header("Speed wind")]
-    [SerializeField] float speedWindMultiplier = 1.2f; // acceleration per m/s, pointing opposite to movement
-    [SerializeField] float baseTurbulence = 10f;
-    [SerializeField] float speedTurbulence = 60f;      // extra turbulence at max speed
-    [SerializeField] float smoothing = 6f;
+    [SerializeField] float speedWindMultiplier = 0.8f; // acceleration per m/s, pointing opposite to movement
+    [SerializeField] float baseTurbulence = 0.5f;      // random acceleration re-rolls every step, so keep this small
+    [SerializeField] float speedTurbulence = 6f;       // extra turbulence at max speed
+    [SerializeField] float smoothing = 2f;             // lower = slower, calmer sway
 
     [Header("Lift")]
-    [SerializeField] float liftBase = 4f;              // constant upward acceleration (gravity is ~9.81)
-    [SerializeField] float liftSpeed = 8f;             // extra upward acceleration at max speed
+    [SerializeField] float liftBase = 2f;              // constant upward acceleration (gravity is ~9.81)
+    [SerializeField] float liftSpeed = 4f;             // extra upward acceleration at max speed
 
-    [SerializeField] float velocitySmoothing = 4f;     // lower = calmer reaction to speed changes
-    [SerializeField] float maxAcceleration = 25f;      // hard cap on the wind applied to the cloth
+    [SerializeField] float velocitySmoothing = 1.5f;   // lower = calmer reaction to speed changes
+    [SerializeField] float maxAcceleration = 15f;      // hard cap on the wind applied to the cloth
 
     Cloth cloth;
     Vector3 smoothedAcceleration;

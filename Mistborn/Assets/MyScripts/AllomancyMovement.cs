@@ -20,6 +20,7 @@ public class AllomancyMovement : MonoBehaviour
     // Allomancy variables
     public float detectionRadius = 10f; // Radius to detect nearby metal objects
     public Material lineMaterial; // Material for the Allomantic line
+    public float lineWidth = 0.1f; // Width of the Allomantic line
     public Material arrowMaterial; // Material for the debug arrow
     public Material selectedMaterial; // Material for the selected metal object
     public Material hoverMaterial; //the material the line renderer gets when we look at the item.
@@ -57,6 +58,7 @@ public class AllomancyMovement : MonoBehaviour
     public GameObject selectedMetalObject = null; // The closest metal object in the direction of arrow
     [Range(0f, 180f)]
     public float selectionAngleThreshold = 30f; // Angle threshold for selecting the closest metal object
+
 
 
     #endregion
@@ -495,8 +497,8 @@ public class AllomancyMovement : MonoBehaviour
             lineMaterialToUse = pullMaterial;
 
         lineRenderer.material = lineMaterialToUse;
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startWidth = lineWidth;
+        lineRenderer.endWidth = lineWidth;
     }
 
     void OnTriggerEnter(Collider other)
