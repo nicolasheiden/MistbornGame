@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.41162336, g: 0.42038426, b: 0.4716981, a: 1}
+  m_FogColor: {r: 0.43670344, g: 0.4671217, b: 0.5471698, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.0152
+  m_FogDensity: 0.008
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.2901961, g: 0.33333334, b: 0.3764706, a: 0}
@@ -645,7 +645,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.2
-  far clip plane: 500
+  far clip plane: 300
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -2899,6 +2899,33 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &780436489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1510654429021690, guid: 7ba2845aa97948a4b8bee3a62a942ab2, type: 3}
+  m_PrefabInstance: {fileID: 1329786739}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &780436493
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780436489}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6576b8dbb593c0545ad6b8a2ef485b8e, type: 3}
 --- !u!1 &794163831
 GameObject:
   m_ObjectHideFlags: 0
@@ -4767,6 +4794,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1990695540513198, guid: 7ba2845aa97948a4b8bee3a62a942ab2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 420277359}
+    - targetCorrespondingSourceObject: {fileID: 1510654429021690, guid: 7ba2845aa97948a4b8bee3a62a942ab2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 780436493}
   m_SourcePrefab: {fileID: 100100000, guid: 7ba2845aa97948a4b8bee3a62a942ab2, type: 3}
 --- !u!1 &1329786740 stripped
 GameObject:
@@ -6322,6 +6352,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
+      propertyPath: _airDrag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 554971910395273869, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: SpeedLinesFast
       value: 
       objectReference: {fileID: 1565895559}
@@ -6615,15 +6649,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3759238650757299497, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: maxParticles
-      value: 10000
+      value: 15000
       objectReference: {fileID: 0}
     - target: {fileID: 3759238650757299497, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: volumeSize.x
-      value: 60
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3759238650757299497, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: volumeSize.z
-      value: 60
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3759238650757299497, guid: a1e5521b2012c6c4a81a4911aae2e884, type: 3}
       propertyPath: emissionPerMeter
@@ -7673,7 +7707,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.2
-    FarClipPlane: 500
+    FarClipPlane: 300
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
